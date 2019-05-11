@@ -12,20 +12,12 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let position of positions; let index = index">
-        <th scope="row">{{index + 1}}</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
-        <td>
-          <button (click)=removePosition(position)>
-            <i class="fa fa-trash"></i>
-          </button>
-        </td>
-      </tr>
+      <app-single-position
+        *ngFor="let position of positions; let index = index"
+        [position]=position
+        [lp]=index+1
+        (itemRemoved)=removePosition($event)
+      ></app-single-position>
     </tbody>
   </table>
   <div class="invoice-positions__actions">

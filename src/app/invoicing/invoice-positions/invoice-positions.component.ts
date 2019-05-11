@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { InvoiceItem } from '../model/item';
+import { InvoiceItem, InvoiceItemFactory } from '../model/item';
 
 @Component({
   selector: 'app-invoice-positions',
@@ -8,16 +8,17 @@ import { InvoiceItem } from '../model/item';
 })
 export class InvoicePositionsComponent implements OnInit {
   private positions: InvoiceItem[] = [];
+  private invoiceItemFactory: InvoiceItemFactory;
 
-  constructor() { }
+  constructor() {
+    this.invoiceItemFactory = new InvoiceItemFactory();
+  }
 
   ngOnInit() {
-    this.positions.push({});
-    this.positions.push({});
   }
 
   addPosition(): void {
-    this.positions.push({});
+    this.positions.push(this.invoiceItemFactory.newInvoiceItem());
   }
 
   removePosition(position: InvoiceItem): void {
