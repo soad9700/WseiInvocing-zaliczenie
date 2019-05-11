@@ -7,4 +7,4 @@ Projekt referencyjny w ramach przedmiotu ``Projektowanie Aplikacji Webowych`` Wy
 ![hero](docs/1-hero.svg "hero module")
 
 ## invoicing page
-![hero](docs/1-invoicing.svg "invoicing module")
+![hero](docs/2-invoicing.svg "invoicing module")
