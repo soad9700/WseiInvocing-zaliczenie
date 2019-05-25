@@ -44,7 +44,7 @@ export class PriceCalculator {
   }
 
     private getTaxValue(gross: number, netto: number): number {
-        return this.round(gross - netto, 2);
+        return this.round((gross - netto), 2);
     }
 
     private calculateGross(calculationRequest: CalcRequest): number {

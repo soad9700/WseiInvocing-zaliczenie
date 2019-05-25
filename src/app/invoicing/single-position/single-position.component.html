@@ -14,7 +14,7 @@
 </td>
 <td>
   <div class="input-group">
-    <input type="text" class="form-control" name="netto" [value]=position.netto />
+    <input [(ngModel)]=position.netto type="number" class="form-control" name="netto" [value]=position.netto (change)=handleChangeNetto($event) />
     <div class="input-group-append">
       <span class="input-group-text">PLN</span>
     </div>
@@ -22,13 +22,13 @@
   
 </td>
 <td>
-    <select class="form-control" name="tax" [value]=position.tax>
+    <select [(ngModel)]=position.tax class="form-control" name="tax" [value]=position.tax (change)=handleChangeTax($event)>
         <option *ngFor="let t of availableTaxes" [value]=t>{{t}}</option>
     </select>
 </td>
 <td>
   <div class="input-group">
-    <input type="text" class="form-control" name="brutton" [value]=position.brutto />
+    <input [(ngModel)]=position.brutto type="text" class="form-control" name="brutton" [value]=position.brutto (change)=handleChangeBrutto($event)/>
     <div class="input-group-append">
       <span class="input-group-text">PLN</span>
     </div>
