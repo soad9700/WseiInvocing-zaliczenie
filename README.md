@@ -28,3 +28,4 @@ Projekt referencyjny w ramach przedmiotu ``Projektowanie Aplikacji Webowych`` Wy
 * ex4 - wyliczanie wartości pozycji
 * ex5 - automatyczne odświeanie po przeliczeniu
 * ex6 - list produktów katalog
+* ex7 - query extenral api for items
