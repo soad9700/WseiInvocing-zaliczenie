@@ -1,6 +1,15 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { InvoiceItem, Unit, Tax } from '../model/item';
 import { PriceCalculator, ItemPrice } from '../model/price-calculation/price-calculator';
+import { ItemCatalog } from '../model/item-catalog/item-catalog';
+import { Subject } from 'rxjs';
+import { debounceTime, switchMap, tap, map, retry } from 'rxjs/operators';
+import { Item } from '../model/item-catalog/item';
+
+interface ItemSuggestion {
+  name: string;
+  label: string;
+}
 
 @Component({
   selector: 'app-single-position',
@@ -8,6 +17,7 @@ import { PriceCalculator, ItemPrice } from '../model/price-calculation/price-cal
   styleUrls: ['./single-position.component.scss']
 })
 export class SinglePositionComponent implements OnInit {
+  readonly WAIT_TIME_BEFORE_SEARCH = 400;
 
   @Input()
   private position: InvoiceItem;
@@ -29,8 +39,21 @@ export class SinglePositionComponent implements OnInit {
   @Output()
   private itemRemoved: EventEmitter<InvoiceItem> = new EventEmitter<InvoiceItem>();
 
+  private searchQuery = new Subject<string>();
+  private searchResult = this.searchQuery.pipe(
+      debounceTime(this.WAIT_TIME_BEFORE_SEARCH),
+      switchMap( q => this.itemsCatalog.items(q)),
+      tap(data => console.log(data)),
+      map(data => this.toAnotherForm(data)),
+      tap(data => console.log(data)),
+      retry(3),
+  );
+
+  suggestions: ItemSuggestion[] = [];
+
   constructor(
-    private priceCalculator: PriceCalculator
+    private priceCalculator: PriceCalculator,
+    private itemsCatalog: ItemCatalog
   ) {}
 
   ngOnInit() {
@@ -38,6 +61,9 @@ export class SinglePositionComponent implements OnInit {
       ...this.position,
       tax: Tax.t23
     };
+    this.searchResult.subscribe((items) => {
+      this.suggestions = items;
+    });
   }
 
   removePosition(): void {
@@ -74,11 +100,32 @@ export class SinglePositionComponent implements OnInit {
     this.updateAccordingToResult(res);
   }
 
+  handleAutocompleteName($event: any): void {
+    this.searchQuery.next($event.target.value);
+  }
+
   private updateAccordingToResult(res: ItemPrice) {
     this.position = {
       ...this.position,
       brutto: res.gross,
       netto: res.net
     };
+  }
+
+  toAnotherForm(data: Item[]): ItemSuggestion[] {
+    return data.map(i => {
+      return {
+        name: i.name,
+        label: i.name
+      };
+    });
+  }
+
+  selectSuggestion(item: ItemSuggestion): void {
+    this.position = {
+      ...this.position,
+      name: item.name
+    };
+    this.suggestions = [];
   }
 }

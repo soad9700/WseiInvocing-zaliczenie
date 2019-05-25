@@ -26,3 +26,5 @@ Projekt referencyjny w ramach przedmiotu ``Projektowanie Aplikacji Webowych`` Wy
 * ex2 - routing hero / invoicing
 * ex3 - lista pozycji
 * ex4 - wyliczanie wartości pozycji
+* ex5 - automatyczne odświeanie po przeliczeniu
+* ex6 - list produktów katalog
