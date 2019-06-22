@@ -11,8 +11,6 @@ interface ItemSuggestion {
   label: string;
 }
 
-
-
 @Component({
   selector: 'app-single-position',
   templateUrl: './single-position.component.html',
@@ -42,6 +40,9 @@ export class SinglePositionComponent implements OnInit {
   @Output()
   private itemRemoved: EventEmitter<InvoiceItem> = new EventEmitter<InvoiceItem>();
 
+  @Output()
+  private positionChanged: EventEmitter<InvoiceItem> = new EventEmitter();
+
   private searchQuery = new Subject<string>();
   private searchResult = this.searchQuery.pipe(
       debounceTime(this.WAIT_TIME_BEFORE_SEARCH),
@@ -60,10 +61,8 @@ export class SinglePositionComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.position = {
-      ...this.position,
-      tax: Tax.t23
-    };
+    this.position.tax = Tax.t23
+    
     this.searchResult.subscribe((items) => {
       this.suggestions = items;
     });
@@ -108,11 +107,9 @@ export class SinglePositionComponent implements OnInit {
   }
 
   private updateAccordingToResult(res: ItemPrice) {
-    this.position = {
-      ...this.position,
-      brutto: res.gross,
-      netto: res.net
-    };
+    this.position.brutto = res.gross;
+    this.position.netto = res.net;
+    this.positionChanged.next(this.position);
   }
 
   toAnotherForm(data: Item[]): ItemSuggestion[] {
@@ -125,10 +122,7 @@ export class SinglePositionComponent implements OnInit {
   }
 
   selectSuggestion(item: ItemSuggestion): void {
-    this.position = {
-      ...this.position,
-      name: item.name
-    };
+    this.position.name = item.name;
     this.suggestions = [];
   }
 }

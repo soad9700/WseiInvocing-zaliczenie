@@ -14,10 +14,10 @@
   </ul>
 </td>
 <td>
-  <input class="form-control" type="number" name="quantity" [value]=position.quantity />
+  <input class="form-control" type="number" name="quantity" [value]=position.quantity [(ngModel)]=position.quantity/>
 </td>
 <td>
-  <select class="form-control" name="unit" [value]=position.unit>
+  <select class="form-control" name="unit" [value]=position.unit [(ngModel)]=position.unit>
     <option *ngFor="let u of availableUnits" [value]=u>{{u}}</option>
   </select>
 </td>
