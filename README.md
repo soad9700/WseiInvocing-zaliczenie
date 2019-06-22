@@ -29,3 +29,4 @@ Projekt referencyjny w ramach przedmiotu ``Projektowanie Aplikacji Webowych`` Wy
 * ex5 - automatyczne odświeanie po przeliczeniu
 * ex6 - list produktów katalog
 * ex7 - query extenral api for items
+* ex8 - Google product catalog
