@@ -1,29 +1,77 @@
+<div class="invoice-header">
+  <form [formGroup]="invoiceForm">
+    <div class="card">
+      <mat-card>
+        <h2>Sender</h2>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Name" formControlName="firstName"/>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Address" formControlName="firstAddress"/>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <input type="number" matInput placeholder="NIP" formControlName="firstNIP"/>
+        </mat-form-field>
+      </mat-card>
+    </div>
+    <div class="card">
+      <mat-card>
+        <h2>Receiver</h2>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Name" formControlName="secondName"/>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Address" formControlName="secondAddress"/>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <input type="number" matInput placeholder="NIP" formControlName="secondNIP"/>
+        </mat-form-field>
+      </mat-card>
+    </div>
+  </form>
+</div>
 <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Item name</th>
-        <th scope="col">Quantity</th>
-        <th scope="col">Unit</th>
-        <th scope="col">netto</th>
-        <th scope="col">tax</th>
-        <th scope="col">gross</th>
-        <th scope="col"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <app-single-position
-        *ngFor="let position of positions; let index = index"
-        [position]=position
-        [lp]=index+1
-        (positionChanged)=handlePositionChanged($event)
-        (itemRemoved)=removePosition($event)
-      ></app-single-position>
-    </tbody>
-  </table>
-  <div class="invoice-positions__actions">
-    <button (click)="addPosition()" type="button" class="btn btn-primary invoice-positions__action">
-      add position
-      <i class="fa fa-plus"></i>
-    </button>
-  </div>
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Item name</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Unit</th>
+      <th scope="col">netto</th>
+      <th scope="col">tax</th>
+      <th scope="col">gross</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <app-single-position
+      *ngFor="let position of positions; let index = index"
+      [position]="position"
+      [lp]="index + 1"
+      (positionChanged)="handlePositionChanged($event)"
+      (itemRemoved)="removePosition($event)"
+    ></app-single-position>
+  </tbody>
+</table>
+<div class="invoice-positions__actions">
+  <button
+    (click)="savePositions()"
+    type="button"
+    class="btn btn-primary invoice-positions__action"
+  >
+    save positions
+    <i class="fa fa-plus"></i>
+  </button>
+  <button
+    (click)="addPosition()"
+    type="button"
+    class="btn btn-primary invoice-positions__action"
+  >
+    add position
+    <i class="fa fa-plus"></i>
+  </button>
+</div>
