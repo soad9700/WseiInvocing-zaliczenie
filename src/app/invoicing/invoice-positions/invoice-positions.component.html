@@ -1,39 +1,47 @@
-<div class="invoice-header">
-  <form [formGroup]="invoiceForm">
-    <div class="card">
-      <mat-card>
-        <h2>Sender</h2>
-        <mat-form-field class="example-full-width">
-          <input matInput placeholder="Name" formControlName="firstName"/>
-        </mat-form-field>
+<form class="invoice-header" [formGroup]="invoiceForm">
+  <div class="card">
+    <mat-card>
+      <h2>Sender</h2>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Name" formControlName="firstName" />
+      </mat-form-field>
 
-        <mat-form-field class="example-full-width">
-          <input matInput placeholder="Address" formControlName="firstAddress"/>
-        </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Address" formControlName="firstAddress" />
+      </mat-form-field>
 
-        <mat-form-field class="example-full-width">
-          <input type="number" matInput placeholder="NIP" formControlName="firstNIP"/>
-        </mat-form-field>
-      </mat-card>
-    </div>
-    <div class="card">
-      <mat-card>
-        <h2>Receiver</h2>
-        <mat-form-field class="example-full-width">
-          <input matInput placeholder="Name" formControlName="secondName"/>
-        </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input
+          type="number"
+          matInput
+          placeholder="NIP"
+          formControlName="firstNIP"
+        />
+      </mat-form-field>
+    </mat-card>
+  </div>
+  <div class="card">
+    <mat-card>
+      <h2>Receiver</h2>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Name" formControlName="secondName" />
+      </mat-form-field>
 
-        <mat-form-field class="example-full-width">
-          <input matInput placeholder="Address" formControlName="secondAddress"/>
-        </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Address" formControlName="secondAddress" />
+      </mat-form-field>
 
-        <mat-form-field class="example-full-width">
-          <input type="number" matInput placeholder="NIP" formControlName="secondNIP"/>
-        </mat-form-field>
-      </mat-card>
-    </div>
-  </form>
-</div>
+      <mat-form-field class="example-full-width">
+        <input
+          type="number"
+          matInput
+          placeholder="NIP"
+          formControlName="secondNIP"
+        />
+      </mat-form-field>
+    </mat-card>
+  </div>
+</form>
 <table class="table">
   <thead>
     <tr>
@@ -61,9 +69,9 @@
   <button
     (click)="savePositions()"
     type="button"
-    class="btn btn-primary invoice-positions__action"
+    class="btn btn-primary invoice-positions__action test"
   >
-    save positions
+    save invoice
     <i class="fa fa-plus"></i>
   </button>
   <button
